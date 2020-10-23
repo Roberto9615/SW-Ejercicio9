@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>OBJETOS</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>Declarando objetos</h1><br>
+        <input type="submit" value="código 1" onclick="mostrar1()"> 
+        <input type="submit" value="código 2" onclick="mostrar2()">
+        <input type="submit" value="código 3" onclick="mostrar3()">
+        <input type="submit" value="código 4" onclick="mostrar4()">
+        <input type="submit" value="código 5" onclick="mostrar5()">
+        <input type="submit" value="código 6" onclick="mostrar6()">
+        <input type="submit" value="código 7" onclick="mostrar7()">
+        <input type="submit" value="código 8" onclick="mostrar8()">
+        <input type="submit" value="código 9" onclick="mostrar9()">
+        
+        <script>
+
+        
+    
+        var miobjeto = {
+        nombre: "Juan",
+        edad: 30
+        };
+        function mostrar1(){
+        var mensaje = "Mi nombre es: " + miobjeto.nombre + "\r\n"; mensaje += "Tengo: " + miobjeto["edad"] + " años";
+        alert(mensaje + "\n Explicacion: En este codigo solo muestra el nombre y la edad de la persona."); 
+        }
+    
+
+        function mostrar2(){
+    var miobjeto = {
+    nombre: "Juan",
+    edad: 30,
+    mostrardatos: function() {
+    var mensaje = "Nombre: " + miobjeto.nombre + "\r\n";
+    mensaje += "Edad: " + miobjeto.edad;
+    alert(mensaje + "\n Explicación: En la primera funcion aparece el nombre Juan y al darle aceptar hace el cambio de nombre a José");
+    },
+    cambiarnombre: function(nombrenuevo) {
+    miobjeto.nombre = nombrenuevo;
+    }
+    };
+    
+    miobjeto.mostrardatos(); // "Nombre: Juan Edad: 30"
+    miobjeto.cambiarnombre("José");
+    miobjeto.mostrardatos();
+    }
+
+
+     
+    function mostrar3(){
+    var miobjeto = {
+    nombre: "Juan",
+    edad: 30,
+    mostrardatos: function() {
+    var mensaje = "Nombre: " + this.nombre + "\r\n";
+    mensaje += "Edad: " + this.edad;
+    },
+    cambiarnombre: function(nombrenuevo) {
+    var nombreviejo = this.nombre;
+    this.nombre = nombrenuevo;
+    return nombreviejo;
+    } };
+    var anterior = miobjeto.cambiarnombre("José");
+    alert("El nombre anterior era: "+anterior+ "\n Explicación: En este código se cambia el nombre de Juan por José por medio de un return"); 
+    }
+
+
+    function mostrar4(){
+    var constructor = function() {
+    var obj = {
+    nombre: "Juan",
+    edad: 30,
+    mostrarnombre: function() {
+    alert(this.nombre + "\n Explicación: En este código se hace una replica del constructor y devuelve el mismo valor del objeto ");
+    },
+    cambiarnombre: function(nombrenuevo) {
+    this.nombre = nombrenuevo;  
+    }
+    };
+    return obj;
+    };
+    var empleado = constructor();
+    empleado.mostrarnombre(); // “Juan”
+
+    }
+    
+    
+    function mostrar5(){
+    var constructor = function(nombreinicial) {
+    var obj = {
+    nombre: nombreinicial,
+    edad: 30,
+    mostrarnombre: function() {
+    alert(this.nombre + "\n Explicación: Usando constructores, podemos crear nuevos objetos de forma dinámica. Por ejemplo, podemos configurar valores iniciales para las propiedades enviando los valores a la función cuando se construye el objeto");
+    },
+    cambiarnombre: function(nombrenuevo) {
+    this.nombre = nombrenuevo;
+    }
+    };
+    return obj;
+    };
+    var empleado = constructor("Juan");
+    empleado.mostrarnombre(); // “Juan”
+    }
+
+    function mostrar6 (){
+    var constructor = function(nombreinicial) {
+    var obj = {
+    nombre: nombreinicial,
+    edad: 30,
+    mostrarnombre: function() {
+    alert(this.nombre);
+    },
+    cambiarnombre: function(nombrenuevo) {
+    this.nombre = nombrenuevo;
+    } };
+    return obj;
+    };
+    var empleado1 = constructor("Juan");
+    var empleado2 = constructor("Roberto");
+    var empleado3 = constructor("Arturo");
+    alert(empleado1.nombre + ", " + empleado2.nombre + ", " + empleado3.nombre + "\n Explicación: En el siguiente código se ilustra cómo crear múltiples objetos con el mismo constructor");
+    }
+
+    
+    function mostrar7 () {
+    var constructor = function() {
+    var nombre = "Juan";
+    var edad = 30;
+    var obj = {
+    mostrarnombre: function() {
+    alert(nombre + "\n Explicación: cuando devolvemos un objeto desde un constructor, sus métodos aún pueden acceder a las variables de la función, incluso cuando ya no se encuentran en el mismo ámbito");
+    },
+    cambiarnombre: function(nombrenuevo) {
+    nombre = nombrenuevo;
+    } };
+    return obj;
+    };
+    var empleado = constructor();
+    empleado.mostrarnombre(); // “Juan”
+    }
+
+    
+    function mostrar8(){
+    function MiObjeto() {
+    this.nombre = "Juan";
+    this.edad = 30;
+    this.mostrarnombre = function(){
+    alert(this.nombre + "\n Explicación: En este código el objeto se define mediante una función y luego se llama con el operador new para crear un objeto a partir de esa definición.");
+    };
+    this.cambiarnombre = function(nombrenuevo){
+    this.nombre = nombrenuevo;      
+    };
+    }
+    var empleado = new MiObjeto();
+    empleado.mostrarnombre(); // “Juan”
+    }
+
+
+    function mostrar9(){
+    function MiObjeto(nombreinicial, edadinicial){
+    this.nombre = nombreinicial;
+    this.edad = edadinicial;
+    this.mostrarnombre = function(){
+    alert(this.nombre + "\n Explicación: Estos tipos de constructores requieren que las propiedades y los métodos de los objetos sean identificados mediante la palabra clave this.");
+    };
+    this.cambiarnombre = function(nombrenuevo){
+    this.nombre = nombrenuevo;
+    };
+    }
+    var empleado = new MiObjeto("Roberto", 55);
+    empleado.mostrarnombre(); // “Roberto”
+    }
+
+</script>
+</body> 
+</html>
